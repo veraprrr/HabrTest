@@ -56,7 +56,7 @@ class MainPageTest {
         assertTrue(driver.findElement(By.cssSelector("input.form__field-input[name='email']")).isDisplayed(), "Поле ввода email не найдено на странице");
 
         WebElement passwordField = driver.findElement(By.cssSelector("input.form__field-input[name='password']"));
-        assertTrue(driver.findElement(By.cssSelector("input.form__field-input[name='password']")).isDisplayed(), "Поле ввода email не найдено на странице");
+        assertTrue(driver.findElement(By.cssSelector("input.form__field-input[name='password']")).isDisplayed(), "Поле ввода пароля не найдено на странице");
 
         WebElement enterButton = driver.findElement(By.cssSelector(".button_primary"));
         assertTrue(driver.findElement(By.cssSelector(".button_primary")).isDisplayed(), "Кнопка входа не найдена на странице");
