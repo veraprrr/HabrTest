@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,6 +22,7 @@ class MainPageTest {
     void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -42,9 +44,12 @@ class MainPageTest {
         WebElement searchField = driver.findElement(searchFieldCss);
         searchField.sendKeys(input);
         searchField.submit();
+        String attributeValue = driver
+                .findElement(searchFieldCss)
+                .getAttribute("value");
 
         WebElement searchPageField = driver.findElement(searchFieldCss);
-        assertEquals(input, searchPageField.getAttribute("value"), "Текст не совпадает");
+        assertEquals(input, attributeValue, "Текст не совпадает");
     }
 
     @Test
@@ -53,12 +58,12 @@ class MainPageTest {
         authorizationButton.click();
 
         WebElement emailField = driver.findElement(By.cssSelector("input.form__field-input[name='email']"));
-        assertTrue(driver.findElement(By.cssSelector("input.form__field-input[name='email']")).isDisplayed(), "Поле ввода email не найдено на странице");
+        assertTrue(emailField.isDisplayed(), "Поле ввода email не найдено на странице");
 
         WebElement passwordField = driver.findElement(By.cssSelector("input.form__field-input[name='password']"));
-        assertTrue(driver.findElement(By.cssSelector("input.form__field-input[name='password']")).isDisplayed(), "Поле ввода пароля не найдено на странице");
+        assertTrue(passwordField.isDisplayed(), "Поле ввода пароля не найдено на странице");
 
         WebElement enterButton = driver.findElement(By.cssSelector(".button_primary"));
-        assertTrue(driver.findElement(By.cssSelector(".button_primary")).isDisplayed(), "Кнопка входа не найдена на странице");
+        assertTrue(enterButton.isDisplayed(), "Кнопка входа не найдена на странице");
     }
 }
