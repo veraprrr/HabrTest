@@ -13,7 +13,7 @@ public class ArticlesMainPage {
 
     private final AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(ArticlesMainPage.class));
 
-    //WebDriver driver;
+    WebDriver driver;
 
     @FindBy(css = "a[href='/ru/posts/']")
     private WebElement postsOnMain;
